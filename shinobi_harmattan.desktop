@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Terminal=false
+Name=shinobi
+Exec=/usr/bin/invoker --type=d -s /opt/shinobi/bin/shinobi
+Icon=/usr/share/icons/hicolor/80x80/apps/shinobi80.png
+X-Window-Icon=
+X-HildonDesk-ShowInToolbar=true
+X-Osso-Type=application/x-executable

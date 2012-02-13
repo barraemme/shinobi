@@ -1,43 +1,10 @@
-import QtQuick 1.1
+import QtQuick 1.0
 import Box2D 1.0
-import com.nokia.meego 1.0
 
-/*PageStackWindow {
-    id: appWindow
-
-    initialPage: mainPage
-
-    MainPage {
-        id: mainPage
-    }
-
-    ToolBarLayout {
-        id: commonTools
-        visible: true
-        ToolIcon {
-            platformIconId: "toolbar-view-menu"
-            anchors.right: (parent === undefined) ? undefined : parent.right
-            onClicked: (myMenu.status === DialogStatus.Closed) ? myMenu.open() : myMenu.close()
-        }
-    }
-
-    Menu {
-        id: myMenu
-        visualParent: pageStack
-        MenuLayout {
-            MenuItem { text: qsTr("Sample menu item") }
-        }
-    }
-}*/
 Image {
     id: screen;
 
-    function gravityChanged(xacc, yacc) {
-        world.gravity = Qt.point(xacc * 2, yacc * 2)
-    }
-
-    width: screenWidth; height: screenHeight
-
+    width: 640; height: 360
     source: "images/background.png"
 
     Image {
@@ -53,7 +20,7 @@ Image {
     }
 
     // A wheel that will be created dynamically
-    /*Component {
+    Component {
         id: wheelComponent
 
         Body {
@@ -116,7 +83,7 @@ Image {
                 }
             }
         }
-    }*/
+    }
 
     Text {
         anchors {
@@ -129,10 +96,11 @@ Image {
         font.pixelSize: 12
     }
 
-    /*Flickable {
+    Flickable {
         anchors.fill: parent
 
-        contentWidth: world.width
+        // Try to double the contentWidth..
+        contentWidth: world.width // * 2
         contentHeight: world.height
 
 
@@ -229,7 +197,7 @@ Image {
                 }
             }
         }
-    }*/
+    }
 
 
     Image {

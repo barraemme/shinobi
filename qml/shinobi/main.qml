@@ -1,35 +1,15 @@
 import QtQuick 1.1
 import Box2D 1.0
-import com.nokia.meego 1.0
+import Expresso 1.0
 
-/*PageStackWindow {
-    id: appWindow
 
-    initialPage: mainPage
+MainWindow {
+    width: screenWidth; height: screenHeight
+}
 
-    MainPage {
-        id: mainPage
-    }
 
-    ToolBarLayout {
-        id: commonTools
-        visible: true
-        ToolIcon {
-            platformIconId: "toolbar-view-menu"
-            anchors.right: (parent === undefined) ? undefined : parent.right
-            onClicked: (myMenu.status === DialogStatus.Closed) ? myMenu.open() : myMenu.close()
-        }
-    }
 
-    Menu {
-        id: myMenu
-        visualParent: pageStack
-        MenuLayout {
-            MenuItem { text: qsTr("Sample menu item") }
-        }
-    }
-}*/
-Image {
+/*Image {
     id: screen;
 
     function gravityChanged(xacc, yacc) {
@@ -53,7 +33,7 @@ Image {
     }
 
     // A wheel that will be created dynamically
-    /*Component {
+    Component {
         id: wheelComponent
 
         Body {
@@ -116,7 +96,7 @@ Image {
                 }
             }
         }
-    }*/
+    }
 
     Text {
         anchors {
@@ -229,7 +209,7 @@ Image {
                 }
             }
         }
-    }*/
+    }
 
 
     Image {
@@ -258,4 +238,4 @@ Image {
             onReleased: parent.scale = 1.0
         }
     }
-}
+}*/

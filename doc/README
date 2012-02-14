@@ -1,3 +1,31 @@
 Libraries to install for compilation:
 libgl1-mesa-dev
 libglu1-mesa-dev
+libpulse-dev
+
+SpriteScene: A component that handle all sprites steps (it supports
+step synchronization with other libraries like QmlBox2D)
+
+Sprite/SpriteState: A component to handle frames and sprite states in
+a step-oriented way (all sprites can be paused/resumed in sync)
+
+PixmapText: A component to draw stylized texts, mapping chars to a
+given position in a tiled image.
+
+ParticleSystem: A simple step-oriented particle component.
+ImageLoader: A dynamic image provider that is meant to be used to load
+images async during loading time (basically during splash screens).
+
+PcmSound : A low latency API to play wav files (PCM format). I know
+that Qt-Mobility already provides a sound effect component that is
+meant to handle that, but it's not ready for games yet due the latency
+and some bugs (tested on N8 and N9). Currently, there is just a pulse
+backend but others can be easily added.
+
+RawConnection: It basically creates a C++ connection in order to avoid
+binding evaluations in the QML side (it can be used for example to
+sync QmlBox2D and SpriteScene steps)
+
+Settings: This component is a copy of the Settings component present
+in qt-component-desktop. It's useful to store simple information like
+sound volume, mute states, etc.

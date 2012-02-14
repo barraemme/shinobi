@@ -51,4 +51,4 @@ void Box2DPlugin::registerTypes(const char *uri)
     qmlRegisterType<Box2DRevoluteJoint>(uri, 1, 0, "RevoluteJoint");
 }
 
-Q_EXPORT_PLUGIN2(Box2DPlugin, Box2DPlugin)
+//Q_EXPORT_PLUGIN2(Box2DPlugin, Box2DPlugin)

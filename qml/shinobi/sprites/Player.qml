@@ -10,7 +10,7 @@ FrameSprite {
     property int fuelPlus: 0
     property bool alive: true
 
-    width: 120
+    width: 109
     height: 132
     bullet: true
     fixedRotation: true
@@ -93,6 +93,24 @@ FrameSprite {
                 "image://cached/sprites/player/jumping/1.png",
                 "image://cached/sprites/player/jumping/2.png",
             ]
+        },
+        SpriteState {
+            id: throwingState
+            frameCount: 7
+            frameRate: 0.32
+            frameWidth: 109
+            frameHeight: 132
+            sources: [
+                "image://cached/sprites/player/throwing/1.png",
+                "image://cached/sprites/player/throwing/2.png",
+                "image://cached/sprites/player/throwing/3.png",
+                "image://cached/sprites/player/throwing/4.png",
+                "image://cached/sprites/player/throwing/3.png",
+                "image://cached/sprites/player/throwing/2.png",
+                "image://cached/sprites/player/throwing/1.png",
+            ]
+            onActivated: jetSound.play();
+            onDeactivated: jetSound.stop();
         }
     ]
 
@@ -124,7 +142,7 @@ FrameSprite {
         player.alive = true;
         player.linearVelocity.x = 0;
         player.linearVelocity.y = 0;
-        player.spriteState = fallingState;
+        player.spriteState = throwingState;
     }
 
     function advance() {
@@ -160,7 +178,7 @@ FrameSprite {
 
         // ground collision
         if (other.categories == Box.Category2) {
-            sprite.spriteState = walkingState;
+            sprite.spriteState = throwingState;
             return;
         }
 
@@ -193,6 +211,6 @@ FrameSprite {
         if (player.spriteState == flyingState)
             player.spriteState = fallingState;
         else if (player.spriteState == jumpToFlyState)
-            player.spriteState = walkingState;
+            player.spriteState = throwingState;
     }
 }

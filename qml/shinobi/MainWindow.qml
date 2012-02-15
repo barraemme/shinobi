@@ -4,21 +4,23 @@ import Expresso 1.0
 Item {
     property int unlockCount: 0
 
-    Image {
+    /*Image {
         anchors.centerIn: parent
         source: "image://cached/scene/bg.png"
 
-        Loader {
-            id: screen
-            anchors.fill: parent
-        }
 
-        Loader {
-            id: splash
-            anchors.fill: parent
-            source: Qt.resolvedUrl("Splash.qml")
-        }
 
+    }*/
+
+    Loader {
+        id: screen
+        anchors.fill: parent
+    }
+
+    Loader {
+        id: splash
+        anchors.fill: parent
+        source: Qt.resolvedUrl("Splash.qml")
     }
 
     ImageLoader {

@@ -24,6 +24,11 @@ Item {
             screen.state = "menu";
     }
 
+    Image {
+        anchors.centerIn: parent
+        source: "image://cached/scene/bg.png"
+    }
+
     Settings {
         id: settings
         property int highScore: 0

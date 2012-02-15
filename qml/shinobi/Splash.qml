@@ -4,6 +4,12 @@ Item {
     id: splash
     signal timeout()
 
+    Image {
+        anchors.centerIn: parent
+        source: "image://cached/scene/bg-night.png"
+
+    }
+
     MouseArea {
         // block mouse events
         anchors.fill: parent
@@ -12,20 +18,22 @@ Item {
     Landscape {
         anchors.fill: parent
 
+        back: "image://cached/scene/ground-night.png"
+        front: "image://cached/scene/home-night.png"
+
         Text {
             width: parent.width
             horizontalAlignment: Text.AlignHCenter
-            y: 150
+            y: ninja.maxHeight-100
             text: "Loading ..."
             font.pointSize: 50
-            color: "black"
-            style: Text.Outline;
-            styleColor: "#10522F"
+            color: "#10522F"
+            z:50
         }
 
         Image {
             x: 390
-            y: 450
+            y: ninja.minHeight+ninja.height+20
             source: "image://cached/loading/shadow.png"
             // The scale property depends on the y position
             scale: ninja.y * 0.2 / (ninja.minHeight - ninja.maxHeight)
@@ -34,10 +42,12 @@ Item {
 
         Image {
             id: ninja
-            property int maxHeight: 300
-            property int minHeight: 340
+            property int maxHeight: 220
+            property int minHeight: 260
             x: 368
             y: minHeight
+            width: 89
+            height: 100
             source: "image://cached/loading/1.png"
 
             SequentialAnimation on y {

@@ -29,3 +29,10 @@ sync QmlBox2D and SpriteScene steps)
 Settings: This component is a copy of the Settings component present
 in qt-component-desktop. It's useful to store simple information like
 sound volume, mute states, etc.
+
+TODO:
+- simple demo level
+- levels management
+- levels menu
+- improve graphic
+

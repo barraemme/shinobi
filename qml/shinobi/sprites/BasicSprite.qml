@@ -44,7 +44,7 @@ Body {
         if (yVelocity != 0)
             sprite.linearVelocity.y = yVelocity;
 
-        if (sprite.x + sprite.width * 2 < -canvas.sceneX)
+        if ((sprite.x + sprite.width * 2 < -canvas.sceneX) || (sprite.x + sprite.width * 2 > canvas.sceneWidth))
             sprite.destroy(0);
     }
 }

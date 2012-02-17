@@ -49,11 +49,12 @@ Item {
         height: root.height
 
         automaticStep: false
-        onAdvanced: Engine.tick();
+        //move background
+        //onAdvanced: Engine.tick();
 
         property real sceneX: 0
         property real sceneY: Math.min(0.0, player.y)
-        property real sceneWidth: 10e8
+        property real sceneWidth: canvas.width *6.0
         property real sceneHeight: canvas.height * 6.0
 
         World {
@@ -76,7 +77,15 @@ Item {
                 z: 1
             }
 
+            Shuriken {
+                id: bullet
+                z: 2
+                x: player.x+100
+                y: player.y
+            }
+
             Floor {
+                id: floor
                 y: canvas.height - height
                 width: canvas.sceneWidth
             }
@@ -90,12 +99,47 @@ Item {
                 id: highScoreFlag
                 y: 300
             }
-        }
+        }        
 
         MouseArea {
+            id: fis
             anchors.fill: parent
-            onPressed: player.fly();
-            onReleased: player.stop();
+
+            /* Get first positions */
+            property int oldX
+            property int oldY
+
+            /* Calculate new positions */
+            property int newX
+            property int newY
+
+            onPressed: {
+                fis.oldX = mouse.x
+                fis.oldY = mouse.y
+                log();
+            }
+
+            /*onPositionChanged: {
+                fis.newX = mouse.x
+                fis.newY = mouse.y
+                log();
+            }*/
+
+            onReleased: {
+                fis.newX = mouse.x
+                fis.newY = mouse.y
+                log();
+
+                Engine.playerLoadBullet(Qt.point(fis.newX-fis.oldX, fis.newY-fis.oldY));
+            }
+
+            function log(){
+                console.log("old X:"+oldX);
+                console.log("old Y:"+oldY);
+                console.log("new X:"+newX);
+                console.log("new Y:"+newY);
+            }
+
         }
 
         Component.onCompleted: {

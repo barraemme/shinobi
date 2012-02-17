@@ -27,7 +27,7 @@ var phase = 0;
 var levelCount = 0;
 var levelLength = 3000;
 var ticksPerEnemy = 300;
-
+var goundY = 0;
 
 function init()
 {
@@ -45,7 +45,7 @@ function startGame(doRun)
 
 function reset()
 {
-    player.reset();
+    player.reset();   
     canvas.sceneX = -player.x + 100;
 
     fan = 0;
@@ -141,12 +141,12 @@ function tick()
     }
 
     if (player.alive) {
-        screen.score = parseInt(player.x / screen.metersByPixel);
+        /*screen.score = parseInt(player.x / screen.metersByPixel);
 
         var ppos = -player.x + 100;
         var diff = Math.min(0, ppos - canvas.sceneX);
         background.offset = (background.offset - diff) % background.pixelLoop
-        canvas.sceneX = ppos;
+        canvas.sceneX = ppos;*/
     } else {
         if (player.x + player.width < -canvas.sceneX) {
             restartGame();
@@ -159,6 +159,16 @@ function restartGame()
     screen.highScore = Math.max(screen.highScore,
                                 screen.score)
     screen.score = 0;
-
     startGame(true);
+}
+
+function playerLoadBullet(impulse) {
+    player.loadBullet();
+    var point =  bullet.getWorldPoint(Qt.point(12,24));
+    bullet.applyLinearImpulse(impulse, point);
+   // bullet.applyTorque(0.8);
+}
+
+function playerThrowBullet(){
+    player.throwBullet();
 }

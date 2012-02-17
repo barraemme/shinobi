@@ -12,7 +12,7 @@ FrameSprite {
 
     width: 109
     height: 132
-    bullet: true
+    bullet: false
     fixedRotation: true
     sleepingAllowed: false
 
@@ -95,22 +95,53 @@ FrameSprite {
             ]
         },
         SpriteState {
-            id: throwingState
-            frameCount: 7
-            frameRate: 0.32
+            id: loadingState
+            frameCount: 4
+            frameRate: 1
             frameWidth: 109
             frameHeight: 132
+            loopCount: 1
+            nextState: throwingState
+
             sources: [
                 "image://cached/sprites/player/throwing/1.png",
                 "image://cached/sprites/player/throwing/2.png",
                 "image://cached/sprites/player/throwing/3.png",
                 "image://cached/sprites/player/throwing/4.png",
+            ]
+            onActivated: logState();
+            onDeactivated: logState();
+        },
+        SpriteState {
+            id: throwingState
+            frameCount: 3
+            frameRate: 1
+            frameWidth: 109
+            frameHeight: 132
+            loopCount: 1
+            nextState: idleState
+
+            sources: [
                 "image://cached/sprites/player/throwing/3.png",
                 "image://cached/sprites/player/throwing/2.png",
                 "image://cached/sprites/player/throwing/1.png",
             ]
-            onActivated: jetSound.play();
-            onDeactivated: jetSound.stop();
+            onActivated: logState();
+            onDeactivated: logState();
+
+        },
+        SpriteState {
+            id: idleState
+            frameCount: 1
+            frameRate: 0.50
+            frameWidth: 109
+            frameHeight: 132
+            loopCount: 1
+            sources: [
+                "image://cached/sprites/player/throwing/1.png",
+            ]
+            onActivated: logState();
+            onDeactivated: logState();
         }
     ]
 
@@ -136,20 +167,21 @@ FrameSprite {
 
     function reset() {
         player.x = 100;
-        player.y = -height;
+        console.log(floor.y-floor.height);
+        player.y = floor.y-floor.height-player.height
         player.fuel = 1.0;
         player.fuelPlus = 0;
         player.alive = true;
         player.linearVelocity.x = 0;
         player.linearVelocity.y = 0;
-        player.spriteState = throwingState;
+        player.spriteState = idleState;
     }
 
     function advance() {
-        if (player.alive)
-            player.linearVelocity.x = 300;
+        /*if (player.alive)
+            player.linearVelocity.x = 300;*/
 
-        if (player.spriteState == flyingState) {
+        /*if (player.spriteState == flyingState) {
             var impulse = Qt.point(0, -240);
             player.fuel = Math.max(0, player.fuel - 0.044);
 
@@ -165,15 +197,15 @@ FrameSprite {
             }
         } else {
             player.fuel = Math.min(1.0, player.fuel + 0.010);
-        }
+        }*/
 
-        var impulse = Qt.point(-300, 0);
-        player.applyLinearImpulse(impulse, getWorldCenter());
+        //var impulse = Qt.point(-300, 0);
+        //player.applyLinearImpulse(impulse, getWorldCenter());
     }
 
     function handleCollision(other) {
         // ceil collision
-        if (other.categories == Box.Category6)
+        /*if (other.categories == Box.Category6)
             return;
 
         // ground collision
@@ -194,7 +226,7 @@ FrameSprite {
         if (player.alive) {
             player.alive = false;
             hitSound.play();
-        }
+        }*/
     }
 
     function fly() {
@@ -212,5 +244,23 @@ FrameSprite {
             player.spriteState = fallingState;
         else if (player.spriteState == jumpToFlyState)
             player.spriteState = throwingState;
+    }
+
+    function loadBullet() {
+        if (player.spriteState != loadingState){
+            player.spriteState = loadingState;
+            console.log("loadingState");
+        }
+    }
+
+    function throwBullet(){
+        if (player.spriteState == loadingState){
+            player.spriteState = throwingState;
+            console.log("throwingState");
+        }
+    }
+
+    function logState(){
+        console.log("state: "+player.spriteState.loopCount);
     }
 }

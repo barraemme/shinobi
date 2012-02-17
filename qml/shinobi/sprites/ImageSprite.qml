@@ -21,7 +21,7 @@ import QtQuick 1.1
 
 BasicSprite {
     bullet: true
-    sleepingAllowed: false
+    sleepingAllowed: true
 
     width: Math.max(image.width, 1)
     height: Math.max(image.height, 1)

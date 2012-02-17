@@ -263,6 +263,13 @@ void Box2DBody::applyLinearImpulse(const QPointF &impulse,
     }
 }
 
+void Box2DBody::applyAngularImpulse(qreal impulse)
+{
+    if (mBody) {
+        mBody->ApplyAngularImpulse(impulse);
+    }
+}
+
 void Box2DBody::applyTorque(qreal torque)
 {
     if (mBody)
@@ -279,3 +286,16 @@ QPointF Box2DBody::getWorldCenter() const
     }
     return worldCenter;
 }
+
+QPointF Box2DBody::getWorldPoint(const QPointF &point) const
+{
+    QPointF worldPoint;
+    if (mBody) {
+        const b2Vec2 &center = mBody->GetWorldPoint(b2Vec2(point.x() / scaleRatio,
+                                                           -point.y() / scaleRatio));
+        worldPoint.setX(center.x * scaleRatio);
+        worldPoint.setY(-center.y * scaleRatio);
+    }
+    return worldPoint;
+}
+

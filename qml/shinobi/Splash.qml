@@ -47,7 +47,7 @@ Item {
             x: 368
             y: minHeight
             width: 89
-            height: 100
+            height: 107
             source: "image://cached/loading/1.png"
 
             SequentialAnimation on y {
